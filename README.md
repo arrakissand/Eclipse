@@ -1,9 +1,15 @@
 # Eclipse
 
-> Tweette detaylar mevcuttu.
-
 > İşlemleri herhangi bir sunucumuzda yapalım muhim değil.
+# Önce düşük bellekli sunucular için 12Gb Bellek için swap alanı oluşturalım. 8 Gb la denedim ama hatalar aldım.
+sudo swapoff -a
+sudo fallocate -l 12288 /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
+# bzip kütüpanelerini yükleyelim, eksik olursa dosayları açamazınız
+sudo apt-get install bzip2
 
 ## Contrat Deploy:
 
@@ -42,6 +48,9 @@ git clone https://github.com/solana-labs/example-helloworld
 cd example-helloworld
 npm install
 
+# cc hatası alırsanız aşağıdaki komutu uygulayın;
+sudo apt install build-essential
+
 # burda biraz bekletecek rusttan dolayı
 npm run build:program-rust
 # program id not edin
@@ -63,9 +72,19 @@ cd testnet-deposit
 yarn install
 yarn add ethers
 
-# Altta ki komutu düzenleyelim (tırnakları kaldırın):
+
+# Yukarıdaki son iki komutta hata alanlar aşağıdaki kodlarla devam etsinler;
+sudo apt remove cmdtest 
+sudo apt remove yarn 
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - 
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list 
+sudo apt-get update 
+sudo apt-get install yarn -y
+
+
+# Altta ki komutu düzenleyelim (tırnakları kaldırın). Sadece <solanaAdresi> ve <MetamaskPrivateKeyi> kısımları değiştiriyorsunuz.  
 node deposit.js <solanaAdresi> 0x7C9e161ebe55000a3220F972058Fb83273653a6e 500000 100 <MetamaskPrivateKeyi> https://rpc.sepolia.org
-# solana cüzdanı yukarıda oluşturduk onu import edin yeni profilde.
+# yukarıda oluşturduğumuz solana adresini yeni bir phantom cuzdana kelimeleri import ederke oluşturun. Cüzdandan Solana adresini kopyalayıp <solanaAdresi> yerine yapıştırn.
 ```
 
 > başarılıysa success ve tx çıktısı verecek
