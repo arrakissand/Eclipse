@@ -1,6 +1,6 @@
 # Eclipse
-
-> İşlemleri herhangi bir sunucumuzda yapalım muhim değil.
+```console
+# İşlemleri herhangi bir sunucumuzda yapalım muhim değil.
 # Önce düşük bellekli sunucular için 12Gb Bellek için swap alanı oluşturalım. 8 Gb la denedim ama hatalar aldım.
 sudo swapoff -a
 sudo fallocate -l 12288 /swapfile
@@ -13,7 +13,7 @@ sudo apt-get install bzip2
 
 ## Contrat Deploy:
 
-```console
+
 # 1'i seçelim:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
